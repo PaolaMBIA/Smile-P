@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { data } from "../../data";
+import { useNavigate } from "react-router-dom";
 
 const CustomMain = styled.main`
   display: flex;
@@ -26,14 +27,22 @@ const CustomBody = styled.tbody`
   overflow: hidden;
 `;
 
-const CustomFooter = styled.footer`
+const CustomButton = styled.button`
   background-color: rgb(179, 183, 205);
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  padding: 5px;
+  padding-right: 15px;
+  padding-left: 15px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background-color: grey;
+  }
 `;
 
 function Transactions() {
+  const navigate = useNavigate();
+
   return (
     <CustomMain>
       <CustomTable>
@@ -43,7 +52,7 @@ function Transactions() {
             <th>Type</th>
             <th>Mode</th>
             <th>Montant (€)</th>
-            <th></th>
+            <th>Actions</th>
           </tr>
         </CustomHead>
         <CustomBody>
@@ -54,7 +63,11 @@ function Transactions() {
               <td>{transaction.mode}</td>
               <td>{transaction.amount}</td>
               <td>
-                <button>Détails</button>
+                <CustomButton
+                  onClick={() => navigate(`/transactions/${transaction.id}`)}
+                >
+                  Détails
+                </CustomButton>
               </td>
             </tr>
           ))}
