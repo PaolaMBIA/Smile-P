@@ -21,26 +21,34 @@ const Img = styled.img`
   width: 200px;
 `;
 
+const ImgCover = styled.img`
+  width: 1400px;
+  height: 300px;
+`;
+
 function Menu() {
   return (
-    <Container>
-      <Img src="/logo.svg" alt="logo" />
+    <div>
+      <Container>
+        <Img src="/logo.svg" alt="logo" />
 
-      <Navigation>
-        <NavLink
-          className={({ isActive }) => (isActive ? "active-block" : "link")}
-          to="/transactions"
-        >
-          Transactions
-        </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "active-block" : "link")}
-          to="/summary"
-        >
-          Récapitulatif
-        </NavLink>
-      </Navigation>
-    </Container>
+        <Navigation>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active-block" : "link")}
+            to="/transactions"
+          >
+            Transactions
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active-block" : "link")}
+            to="/summary"
+          >
+            Récapitulatif
+          </NavLink>
+        </Navigation>
+      </Container>
+      <ImgCover src="/assets/cover.svg" alt="couverture" />
+    </div>
   );
 }
 
