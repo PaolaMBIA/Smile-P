@@ -1,5 +1,5 @@
 function Summary() {
-  return <div>Transactions</div>;
+  return <main>Recap</main>;
 }
 
 export default Summary;

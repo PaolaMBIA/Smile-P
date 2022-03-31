@@ -1,5 +1,5 @@
-function Transaction() {
-  return <div>Transactions</div>;
+function Transactions() {
+  return <main>Transactions</main>;
 }
 
-export default Transaction;
+export default Transactions;
