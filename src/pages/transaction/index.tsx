@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { data } from "../../data";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { MyContext } from "../../ContextTransaction";
+import AddTransaction from "./AddTransaction";
 
 const CustomMain = styled.main`
   display: flex;
@@ -44,90 +44,55 @@ const CustomButton = styled.button`
   }
 `;
 
-interface IAction {
-  type: string;
-  transaction: {
-    id?: string;
-    datetime?: string;
-    amount?: string;
-    type?: string;
-    mode?: string;
-    commentaire?: string | null;
-  };
-}
-
-interface ITransactions {
-  id: string;
-  datetime: string;
-  amount: string;
-  type: string;
-  mode?: string;
-  commentaire?: string | null;
-}
-
-export function todoReducer(
-  state: ITransactions[],
-  action: IAction
-): ITransactions[] {
-  console.log(action.transaction.id);
-  console.log(state);
-  switch (action.type) {
-    case "add":
-      return [...state, action.transaction] as ITransactions[];
-    case "delete":
-      console.log(action.transaction.id);
-      return state.filter(
-        (transaction) => transaction.id !== action.transaction.id
-      );
-    default:
-      return state;
-  }
-}
-
-export const initialTransations = data.transactions;
-
 function Transactions() {
   const navigate = useNavigate();
-  //const { state } = useLocation();
+  const [isEditable, setIsEditable] = useState<boolean>(false);
+  const { state } = useContext(MyContext);
 
-  const { state, dispatch } = useContext(MyContext);
-  console.log(state);
-  // dispatchTodo({ type: "add", todo: inputValue });
   return (
     <CustomMain>
-      <CustomTable>
-        <CustomHead>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Mode</th>
-            <th>Montant (€)</th>
-            <th>Action</th>
-          </tr>
-        </CustomHead>
-        <CustomBody>
-          {state.map((transaction) => (
-            <tr key={transaction.id}>
-              <td>
-                {new Date(transaction.datetime!).toLocaleDateString("fr")}
-              </td>
-              <td>{transaction.type}</td>
-              <td>{transaction.mode}</td>
-              <td>{transaction.amount}</td>
-              <td>
-                <CustomButton
-                  onClick={() => navigate(`/transactions/${transaction.id}`)}
-                >
-                  Détails
-                </CustomButton>
-              </td>
+      {!isEditable ? (
+        <CustomTable>
+          <CustomHead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Mode</th>
+              <th>Montant (€)</th>
+              <th>Action</th>
             </tr>
-          ))}
-          <tr>
-            <td colSpan={5}>pagination</td>
-          </tr>
-        </CustomBody>
-      </CustomTable>
+          </CustomHead>
+          <CustomBody>
+            {state.map((transaction) => (
+              <tr key={transaction.id}>
+                <td>
+                  {new Date(transaction.datetime!).toLocaleDateString("fr")}
+                </td>
+                <td>{transaction.type}</td>
+                <td>{transaction.mode}</td>
+                <td>{transaction.amount}</td>
+                <td>
+                  <CustomButton
+                    onClick={() => navigate(`/transactions/${transaction.id}`)}
+                  >
+                    Détails
+                  </CustomButton>
+                </td>
+              </tr>
+            ))}
+            <td colSpan={5}>
+              <CustomButton onClick={() => setIsEditable(true)}>
+                Ajouter une nouvelle transaction
+              </CustomButton>
+            </td>
+            <tr>
+              <td colSpan={5}>pagination</td>
+            </tr>
+          </CustomBody>
+        </CustomTable>
+      ) : (
+        <AddTransaction />
+      )}
     </CustomMain>
   );
 }

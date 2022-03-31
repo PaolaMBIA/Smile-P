@@ -35,7 +35,6 @@ function transactionReducer(
     case "add":
       return [...state, action.transaction];
     case "delete":
-      console.log(action.transaction.id);
       return state.filter(
         (transaction) => transaction.id !== action.transaction.id
       );
