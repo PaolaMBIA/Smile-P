@@ -29,6 +29,7 @@ const CustomBody = styled.tbody`
 
 function Summary() {
   const { state } = useContext(MyContext);
+  console.log(state);
   const debits = state
     .filter((transaction) => transaction.type === "débit")
     .map((transaction) => parseFloat(transaction.amount!));

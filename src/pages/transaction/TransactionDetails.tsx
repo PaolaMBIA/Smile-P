@@ -55,7 +55,7 @@ function TransactionDetails() {
         <p>Date : {new Date(transaction.datetime!).toLocaleDateString("fr")}</p>
         <p>Type : {transaction.type}</p>
         <p>{transaction.mode && `Mode : ${transaction.mode}`}</p>
-        <p>Montant : {transaction.amount}</p>
+        <p>Montant : {transaction.amount} €</p>
         <p>
           {transaction.commentaire &&
             `Commentaire : ${transaction.commentaire}`}

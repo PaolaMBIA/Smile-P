@@ -110,7 +110,7 @@ function Transactions() {
           />
         </CustomWrapper>
       ) : (
-        <AddTransaction />
+        <AddTransaction setIsEditable={setIsEditable} />
       )}
     </CustomMain>
   );
