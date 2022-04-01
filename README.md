@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://create-react-app.d
 ### Retrieve Project
 
 - Clone the repository on your machine
-  `git clone https://github.com/PaolaMBIA/bookmarks.git`
+  `https://github.com/PaolaMBIA/Smile-P.git`
 
 ### Install Dependencies and start project
 
