@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { ITransactions, MyContext } from "../ContextTransaction";
+import { MyContext } from "../ContextTransaction";
+import { ITransactions } from "../entities";
 import { calculateRange, transactionsDataData } from "../utils";
 
 // ...

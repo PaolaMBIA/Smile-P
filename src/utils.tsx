@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { ITransactions, MyContext } from "./ContextTransaction";
+import { ITransactions } from "./entities";
 
 export function reduce(arrayTransaction: Array<number>): number {
   const result = arrayTransaction.reduce((acc, currentValue) => {

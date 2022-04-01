@@ -1,27 +1,7 @@
 import React, { ReactNode } from "react";
 import { useReducer } from "react";
 import { data } from "./data";
-
-interface IAction {
-  type: string;
-  transaction: {
-    id: string;
-    datetime?: string;
-    amount?: string;
-    type?: string;
-    mode?: string;
-    commentaire?: string | null;
-  };
-}
-
-export interface ITransactions {
-  id: string;
-  datetime?: string;
-  amount?: string;
-  type?: string;
-  mode?: string;
-  commentaire?: string | null;
-}
+import { IAction, ITransactions } from "./entities";
 
 interface MyProviderProps {
   children: ReactNode;

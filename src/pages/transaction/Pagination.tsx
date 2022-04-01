@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import { ITransactions } from "../../ContextTransaction";
+import { ITransactions } from "../../entities";
 import "./Pagination.css";
 
 const CustomButtonBlock = styled.div`
