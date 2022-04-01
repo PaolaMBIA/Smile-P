@@ -1,0 +1,15 @@
+.activeButton {
+  border: none;
+  background-color: #f9e34c;
+  padding: 5px;
+  color: #232e5b;
+  cursor: pointer;
+}
+
+.inactiveButton {
+  padding: 5px;
+  border: none;
+  background-color: #232e5b;
+  color: white;
+  cursor: pointer;
+}

@@ -1,10 +1,12 @@
 import "./App.css";
-import Transaction from "./pages/transaction";
+import Menu from "./components/Menu";
+import AppRouter from "./router";
 
 function App() {
   return (
     <div className="App">
-      <Transaction />
+      <Menu />
+      <AppRouter />
     </div>
   );
 }
