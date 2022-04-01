@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { MyContext } from "../../ContextTransaction";
 import AddTransaction from "./AddTransaction";
+import Pagination from "./Pagination";
+import useTable from "../../hooks/useTable";
 
 const CustomMain = styled.main`
   display: flex;
@@ -44,52 +46,69 @@ const CustomButton = styled.button`
   }
 `;
 
+const CustomWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
 function Transactions() {
   const navigate = useNavigate();
   const [isEditable, setIsEditable] = useState<boolean>(false);
+  const [page, setPage] = useState(1);
   const { state } = useContext(MyContext);
+  const { transactionsData, range } = useTable(state, page, 5);
 
   return (
     <CustomMain>
       {!isEditable ? (
-        <CustomTable>
-          <CustomHead>
-            <tr>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Mode</th>
-              <th>Montant (€)</th>
-              <th>Action</th>
-            </tr>
-          </CustomHead>
-          <CustomBody>
-            {state.map((transaction) => (
-              <tr key={transaction.id}>
-                <td>
-                  {new Date(transaction.datetime!).toLocaleDateString("fr")}
-                </td>
-                <td>{transaction.type}</td>
-                <td>{transaction.mode}</td>
-                <td>{transaction.amount}</td>
-                <td>
-                  <CustomButton
-                    onClick={() => navigate(`/transactions/${transaction.id}`)}
-                  >
-                    Détails
+        <CustomWrapper>
+          <CustomTable>
+            <CustomHead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Mode</th>
+                <th>Montant (€)</th>
+                <th>Action</th>
+              </tr>
+            </CustomHead>
+            <CustomBody>
+              {transactionsData.map((transaction) => (
+                <tr key={transaction.id}>
+                  <td>
+                    {new Date(transaction.datetime!).toLocaleDateString("fr")}
+                  </td>
+                  <td>{transaction.type}</td>
+                  <td>{transaction.mode}</td>
+                  <td>{transaction.amount}</td>
+                  <td>
+                    <CustomButton
+                      onClick={() =>
+                        navigate(`/transactions/${transaction.id}`)
+                      }
+                    >
+                      Détails
+                    </CustomButton>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td colSpan={5}>
+                  <CustomButton onClick={() => setIsEditable(true)}>
+                    Ajouter une nouvelle transaction
                   </CustomButton>
                 </td>
               </tr>
-            ))}
-            <td colSpan={5}>
-              <CustomButton onClick={() => setIsEditable(true)}>
-                Ajouter une nouvelle transaction
-              </CustomButton>
-            </td>
-            <tr>
-              <td colSpan={5}>pagination</td>
-            </tr>
-          </CustomBody>
-        </CustomTable>
+            </CustomBody>
+          </CustomTable>
+          <Pagination
+            range={range}
+            setPage={setPage}
+            page={page}
+            transactionsData={transactionsData}
+          />
+        </CustomWrapper>
       ) : (
         <AddTransaction />
       )}

@@ -14,7 +14,7 @@ interface IAction {
   };
 }
 
-interface ITransactions {
+export interface ITransactions {
   id: string;
   datetime?: string;
   amount?: string;

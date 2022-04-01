@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { MyContext } from "../../ContextTransaction";
+import { reduce, round } from "../../utils";
 
 export const CustomMain = styled.main`
   display: flex;
@@ -26,23 +27,12 @@ const CustomBody = styled.tbody`
   overflow: hidden;
 `;
 
-function reduce(arrayTransaction: Array<number>): number {
-  const result = arrayTransaction.reduce((acc, currentValue) => {
-    return (acc += currentValue);
-  }, 0);
-
-  return result;
-}
-
-function round(value: number): number {
-  return Math.round(value * 100) / 100;
-}
-
 function Summary() {
   const { state } = useContext(MyContext);
   const debits = state
     .filter((transaction) => transaction.type === "débit")
     .map((transaction) => parseFloat(transaction.amount!));
+
   const credits = state
     .filter((transaction) => transaction.type === "crédit")
     .map((transaction) => parseFloat(transaction.amount!));
